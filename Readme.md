@@ -73,3 +73,25 @@ dependencies are installed:
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
+
+# Pre-commit
+
+Pre-commit runs repository checks automatically before each commit. Install the
+project dependencies, then register the hooks with Git:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pre_commit install
+```
+
+The configured hooks run:
+
+- trailing-whitespace, end-of-file, and YAML validation checks;
+- Pylint on staged Python files; and
+- the full pytest suite without writing Python bytecode.
+
+To run the checks manually against all files:
+
+```powershell
+.\.venv\Scripts\python.exe -m pre_commit run --all-files
+```
