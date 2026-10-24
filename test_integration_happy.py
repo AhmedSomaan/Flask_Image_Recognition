@@ -1,6 +1,7 @@
 # test_integration_happy.py
 
 from io import BytesIO
+import re
 
 
 def test_home_page_accessible(client):
@@ -9,6 +10,22 @@ def test_home_page_accessible(client):
 
     assert response.status_code == 200
     assert b"Hand Sign Digit Language Detection" in response.data
+
+
+def test_valid_request_produces_expected_response(client):
+    """Test that a valid image request returns a digit prediction."""
+    image_path = "test_images/2/Sign 2 (97).jpeg"
+
+    with open(image_path, "rb") as image_file:
+        response = client.post(
+            "/prediction",
+            data={"file": (image_file, "Sign 2 (97).jpeg")},
+            content_type="multipart/form-data"
+        )
+
+    assert response.status_code == 200
+    assert b"Prediction" in response.data
+    assert re.search(rb"<h2[^>]*>\d+</h2>", response.data)
 
 
 def test_successful_prediction(client):
