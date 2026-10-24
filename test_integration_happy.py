@@ -2,6 +2,15 @@
 
 from io import BytesIO
 
+
+def test_home_page_accessible(client):
+    """Test that the Flask home page can be accessed successfully."""
+    response = client.get("/")
+
+    assert response.status_code == 200
+    assert b"Hand Sign Digit Language Detection" in response.data
+
+
 def test_successful_prediction(client):
     """Test the successful image upload and prediction."""
     # Create a mock image file with minimal valid content
