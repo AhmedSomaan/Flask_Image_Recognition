@@ -20,3 +20,15 @@ def test_empty_uploaded_file_is_handled(client):
 
     assert response.status_code == 200
     assert b"File cannot be processed." in response.data
+
+
+def test_invalid_uploaded_file_is_handled(client):
+    """Test that a non-image upload returns the error response."""
+    response = client.post(
+        "/prediction",
+        data={"file": (BytesIO(b"not an image"), "invalid.txt")},
+        content_type="multipart/form-data"
+    )
+
+    assert response.status_code == 200
+    assert b"File cannot be processed." in response.data
