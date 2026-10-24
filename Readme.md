@@ -57,3 +57,19 @@ Click [here](https://geekpython.in/run-flask-app-from-the-command-line-in-window
 - Choose an image from the test images folder.
 - You will see a preview of the uploaded image.
 - Click on **Submit** button and see the magic.
+
+# Lint
+
+Pylint is configured in `.pylintrc` and uses the project virtual environment
+through the VS Code workspace settings. Run it from the repository root:
+
+```powershell
+.\.venv\Scripts\python.exe -m pylint app.py model.py conftest.py test_*.py
+```
+
+Pylint is listed in `requirements.txt`, so it is installed when the project
+dependencies are installed:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
