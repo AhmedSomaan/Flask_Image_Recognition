@@ -35,6 +35,17 @@ def test_predict_result():
     assert isinstance(prediction, (int, np.integer)), "Prediction should be an integer class index"
 
 
+def test_image_preprocessing_and_prediction():
+    """Test that an image is preprocessed and classified successfully."""
+    img_path = "test_images/2/Sign 2 (97).jpeg"
+
+    processed_img = preprocess_img(img_path)
+    prediction = predict_result(processed_img)
+
+    assert processed_img.shape == (1, 224, 224, 3)
+    assert isinstance(prediction, (int, np.integer))
+
+
 # Advanced Tests
 
 def test_invalid_image_path():
