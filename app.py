@@ -4,7 +4,8 @@ from model import preprocess_img, predict_result
 
 # Instantiating flask app
 app = Flask(__name__)
-
+csrf = CSRFProtect()
+csrf.init_app(app)
 
 # Home route
 @app.route("/")
